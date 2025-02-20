@@ -1,0 +1,12 @@
+@use 'sass:color';
+
+$primary-color: #2a9d8f; // Greenish tone
+$secondary-color: #264653; // Dark Blue
+$background-color: #f4f4f4; // Light Gray
+$highlight-color: #e68b29; // Warm Orange
+$text-color: #333;
+$font-primary: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+$font-secondary: 'Ranga', cursive;
+$dark-text: #333;
+$overlay-bg: rgba(0, 0, 0, 0.5);
+$hover-btn: color.adjust($highlight-color, $lightness: 10%);

@@ -1,0 +1,287 @@
+@use "colors" as *;
+@use 'sass:color';
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url('../images/header.jpg') no-repeat center center/cover;
+    background-size: cover;
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    .header-content {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+        max-width: 550px;
+        height: 100%;
+
+        h1 {
+            position: absolute;
+            font-size: 2.5rem;
+            text-align: left;
+            top: 30%;
+            right: 13%;
+            width: 160%;
+            line-height: 60px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .book-btn,
+        #printTrip {
+            padding: 15px 30px;
+            margin-top: 20px;
+            margin-left: 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: 0.3s ease;
+            background-color: $highlight-color;
+            border: 0;
+            box-shadow: -5px 7px black;
+
+            &:hover {
+                background: $hover-btn;
+                cursor: pointer;
+                margin-left: 10px;
+            }
+        }
+
+        #printTrip {
+            background-color: $primary-color;
+            color: #f1eeec;
+
+            &:hover {
+                background: color.adjust($primary-color, $lightness: 10%);
+                cursor: pointer;
+                margin-left: 10px;
+            }
+        }
+
+        #add-trip-section {
+            padding-top: 24%;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+        }
+
+        // Form Styling
+        form {
+            background: rgba(255, 255, 255, 0.2);
+            margin-left: 170%;
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            .row {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+
+                label {
+                    font-size: 16px;
+                    font-weight: 540;
+                    color: white;
+                    margin-bottom: 5px;
+                    padding-top: 7px;
+                }
+
+                input {
+                    width: 100%;
+                    padding: 15px;
+                    font-size: 13.5px;
+                    border-radius: 5px;
+                    border: 1px solid $secondary-color;
+                    outline: none;
+                    background: rgba(255, 255, 255, 0.915);
+                    color: $text-color;
+                }
+
+                input:focus {
+                    border-color: $primary-color;
+                    box-shadow: 0 0 5px color.adjust($primary-color, $alpha: -0.3);
+                }
+            }
+
+            .button-panel {
+                margin-right: 100px;
+
+                button {
+                    padding: 15px 50px;
+                    font-size: 16px;
+                    background: $highlight-color;
+                    border: none;
+                    cursor: pointer;
+                    transition: 0.3s;
+                    border-radius: 5px;
+                    margin-top: 10px;
+                    white-space: nowrap;
+
+                    &:hover {
+                        background: $hover-btn;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .hero {
+        height: 100vh;
+
+        .header-content {
+            h1 {
+                font-size: 1.5rem;
+                width: 50%;
+                line-height: 50px;
+                right: 65%;
+            }
+
+            p {
+                font-size: 16px;
+            }
+
+            .book-btn,
+            #printTrip {
+                padding: 12px 25px;
+                font-size: 14px;
+            }
+
+            form {
+                margin-right: 105%;
+                margin-top: 20%;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        height: 100vh;
+
+        .header-content {
+            max-width: 90%;
+
+            h1 {
+                font-size: 1.5rem;
+                width: 80%;
+                text-align: center;
+                top: 62%;
+                right: 10%;
+                line-height: 37px;
+            }
+
+            p {
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+
+            .book-btn,
+            #printTrip {
+                padding: 10px 20px;
+                font-size: 14px;
+                margin-left: 10px;
+            }
+
+            #add-trip-section {
+                padding-top: 30%;
+                flex-direction: column;
+            }
+
+            form {
+                padding: 15px;
+                width: 80%; 
+                position: absolute;
+                right: -95%;
+                top: 10%;
+
+                .row {
+                    input {
+                        font-size: 12px;
+                        padding: 12px;
+                    }
+                }
+
+                .button-panel {
+                    button {
+                        padding: 12px 40px;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        height: 100vh;
+
+        .header-content {
+            h1 {
+                font-size: 1rem;
+                width: 170%;
+                text-align: center;
+                padding-left: 80%;
+                line-height: 40px;
+                margin-top: -20%;
+                margin-right: -2%;
+            }
+
+            p {
+                font-size: 0.5rem;
+                margin-bottom: 10px;
+            }
+
+            .book-btn,
+            #printTrip {
+                padding: 8px 15px;
+                font-size: 13px;
+                margin-left: 5px;
+            }
+
+            #add-trip-section {
+                padding-top: 40%;
+            }
+
+            form {  
+                right: -95%;     
+                .row {
+                    label {
+                        font-size: 14px;
+                    }
+
+                    input {
+                        font-size: 12px;
+                        padding: 10px;
+                    }
+                }
+
+                .button-panel {
+                    button {
+                        padding: 10px 30px;
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+}

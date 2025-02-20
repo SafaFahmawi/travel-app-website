@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Safaa Fahmawi">
+  <meta property="og:title" content="Travel App">
+  <meta property="og:description" content="A travel app to track your trips, including locations, flights, and hotels.">
+
+  <title>Travel App</title>
+  <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <img class="logo" id="page-title" width="10%" src="../../../dist/images/logo1.png"></img>
+    <div class="nav-links">
+      <!-- Sidebar Toggle Button -->
+      <button id="sidebar-toggle" class="sidebar-toggle">☰</button>
+
+      <!-- Sidebar -->
+      <div id="sidebar" class="sidebar">
+        <button id="close-sidebar" class="close-sidebar">&times;</button> <!-- Close Button -->
+        <div class="basic">
+          <h2>Menu</h2>
+          <ul>
+            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#trip_details_section"><i class="fas fa-plane"></i> My Trips</a></li>
+            <li><a href="#hotel-cards-section"><i class="fas fa-hotel"></i> Hotels</a></li>
+            <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+          </ul>
+        </div>
+
+        <button class="sign-in">Sign In</button>
+        <button class="sign-up">Sign Up</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header Section with Background Image -->
+  <header class="hero">
+    <div class="overlay"></div>
+    <div class="header-content">
+      <h1>Explore new horizons <br> Create lasting memories, and travel the world effortlessly—your dream getaway is
+        just a click away!<p>Plan your trips with fresh insights and beautiful destinations.
+          <br>
+          <button class="book-btn">BOOK TRIP NOW</button>
+          <button id="printTrip">Print Trip</button>
+        </p>
+      </h1>
+
+      <!-- Form Inside Header -->
+      <section id="add-trip-section">
+        <form id="add-trip-form">
+          <div class="trip-summary row">
+            <label for="startCity">From Trip</label>
+            <input type="text" id="startCity" required placeholder="Enter Location">
+          </div>
+
+          <div class="trip-summary row">
+            <label for="destinationCity">Destination City</label>
+            <input type="text" id="destinationCity" required placeholder="Enter Location">
+          </div>
+
+          <div class="trip-departing row">
+            <label for="departingDate">Departure Date</label>
+            <input type="date" id="departingDate" required>
+          </div>
+
+          <div class="trip-arriving row">
+            <label for="arrivingDate">Arrival Date</label>
+            <input type="date" id="arrivingDate" required>
+          </div>
+
+          <!-- <div class="trip-details row">
+            <label for="adult">Adult</label>
+            <input type="number" id="adult" placeholder="Number of Adults" min="1" required>
+          </div>
+
+          <div class="trip-details row">
+            <label for="child">Child</label>
+            <input type="number" id="child" placeholder="Number of Children" min="0">
+          </div>-->
+
+          <div class="button-panel row">
+            <button type="button" id="btn-add" class="save-trip">Save Trip</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </header>
+
+  <section id="trip_details_section" class="hidden">
+    <h2>Trip Details</h2>
+    <div id="trip_list" class="trip_list"></div>
+  </section>
+
+  <section id="hotel-cards-section" class="hidden">
+    <h2>Hotel Details</h2>
+    <div id="hotel-grid" class="hotel-grid"></div>
+  </section>
+
+  <section id="booking-form-container" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Book Hotel</h2>
+      <form id="booking-form">
+        <label for="hotelName">Hotel:</label>
+        <input type="text" id="hotelName" readonly>
+
+        <label for="guestName">Your Name:</label>
+        <input type="text" id="guestName" required>
+
+        <label for="checkInDate">Check-in Date:</label>
+        <input type="date" id="checkInDate" required>
+
+        <label for="checkOutDate">Check-out Date:</label>
+        <input type="date" id="checkOutDate" required>
+
+        <label for="numGuests">Number of Guests:</label>
+
+        <label>Adult</label>
+        <input type="number" id="numGuests" min="1" required>
+        <label>Child</label>
+        <input type="number" id="numGuests" min="0" required>
+
+        <button type="submit">Confirm Booking</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="memory-section-container">
+    <div class="content">
+      <h1>Travel to make sweet memories</h1>
+      <p class="subtitle">Find trips that fit a flexible lifestyle</p>
+      <div class="steps">
+        <div class="step">
+          <span class="step-number">01</span>
+          <h2>Find trips that fit your freedom</h2>
+          <p>Travelling offers freedom and flexibility, solitude and spontaneity, and privacy and purpose.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">02</span>
+          <h2>Get back to nature by travel</h2>
+          <p>The world is a playground and you can finally explore Mother Nature’s inimitable canvas.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">03</span>
+          <h2>Reignite those travel tastebuds</h2>
+          <p>There are infinite reasons to love travel, one of them being the food, glorious food.</p>
+        </div>
+      </div>
+      <button class="explore-btn">Start your explore</button>
+    </div>
+  </section>
+
+  <section class="scrolling-gallery">
+    <div class="gallery-wrapper">
+      <div class="gallery">
+        <img src="../../../dist/images/1.jpg" alt="Image 1">
+        <img src="../../../dist/images/2.jpg" alt="Image 2">
+        <img src="../../../dist/images/3.jpg" alt="Image 3">
+        <img src="../../../dist/images/4.jpg" alt="Image 4">
+        <img src="../../../dist/images/5.jpg" alt="Image 5">
+        <img src="../../../dist/images/6.jpg" alt="Image 6">
+        <img src="../../../dist/images/7.jpg" alt="Image 7">
+        <img src="../../../dist/images/8.jpg" alt="Image 8">
+        <img src="../../../dist/images/9.jpg" alt="Image 9">
+        <img src="../../../dist/images/10.jpg" alt="Image 10">
+      </div>
+      <!-- Duplicate gallery to create an infinite effect -->
+      <div class="gallery">
+        <img src="../../../dist/images/11.jpg" alt="Image 1">
+        <img src="../../../dist/images/12.jpg" alt="Image 2">
+        <img src="../../../dist/images/13.jpg" alt="Image 3">
+        <img src="../../../dist/images/14.jpg" alt="Image 4">
+        <img src="../../../dist/images/15.jpg" alt="Image 5">
+        <img src="../../../dist/images/16.jpg" alt="Image 6">
+        <img src="../../../dist/images/17.jpg" alt="Image 7">
+        <img src="../../../dist/images/18.jpg" alt="Image 8">
+        <img src="../../../dist/images/19.jpg" alt="Image 9">
+        <img src="../../../dist/images/20.jpg" alt="Image 10">
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- Branding -->
+      <div class="footer-brand">
+        <h2>TravelLux</h2>
+        <p>Explore the world in luxury. Plan your perfect journey with our premium travel insights.</p>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="footer-links">
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Destinations</a></li>
+          <li><a href="#">Travel Guides</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+        <ul>
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="footer-contact">
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>123 Luxury St, Paris, France</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-phone-alt"></i>
+          <span>+1 234 567 890</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>contact@travellux.com</span>
+        </div>
+      </div>
+
+      <!-- Social Media -->
+      <div class="footer-social">
+        <p>Follow Us</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-company">
+        <p>Developed by Safaa-Fahmawi &copy;2025</p>
+        <p>Udacity</p>
+      </div>
+
+      <button id="back-to-top" title="Go to Top"><b>&#8679;</b></button>
+    </div>
+  </footer>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js');
+      });
+    }
+  </script>
+</body>
+
+</html>

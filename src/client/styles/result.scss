@@ -1,0 +1,453 @@
+@use "colors" as *;
+@use 'sass:color';
+
+#trip_details_section {
+    margin: 5rem auto;
+    display: none;
+
+    h2 {
+        display: inline-block;
+        background-color: #e1edec;
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+        font-size: 2rem;
+        color: $secondary-color;
+    }
+}
+
+// Show Details Button Styling
+.toggle-details-btn {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 15px auto;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+        background-color: color.adjust($primary-color, $lightness: -10%);
+        transform: scale(1.05);
+    }
+
+    &:active {
+        background-color: color.adjust($primary-color, $lightness: -15%);
+        transform: scale(0.98);
+    }
+}
+
+#trip_list {
+    max-width: 95%;
+    margin: 3rem auto;
+    line-height: 1.7rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+
+    &.single-trip {
+        grid-template-columns: 1fr;
+        max-width: 30%;
+        margin: 3rem auto;
+    }
+
+    .trip-item {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .show-hotels-link {
+            color: $highlight-color;
+            font-size: 1rem;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+                font-size: 1.07rem;
+            }
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: $secondary-color;
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .trip-info {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: $text-color;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            p {
+                margin: 5px 0;
+            }
+        }
+
+        .toggle-details-btn,
+        .remove-trip-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 6px;
+            margin-top: 10px;
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+
+        .toggle-details-btn {
+            background: $primary-color;
+            color: white;
+            border: none;
+
+            &:hover {
+                background: color.adjust($primary-color, $lightness: 10%);
+            }
+        }
+
+        .remove-trip-btn {
+            background: $highlight-color;
+            color: white;
+            border: none;
+
+            &:hover {
+                background: color.adjust($highlight-color, $lightness: 10%);
+            }
+        }
+    }
+}
+
+
+// Hotel Cards Section
+#hotel-cards-section {
+    max-width: 800px;
+    margin: 8rem auto;
+    display: none;
+
+    h2 {
+        display: inline-block;
+        background-color: #e1edec;
+        padding: 20px;
+        width: 100%;
+        text-align: center;
+        font-size: 2rem;
+        color: $secondary-color;
+    }
+
+    .hotel-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 4rem;
+        margin-top: 50px;
+    }
+
+    .hotel-card {
+        background: white;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+        line-height: 40px;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    button {
+        padding: 10px 10px;
+        font-size: 13.5px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        font-weight: 600;
+
+        &.open-booking-modal {
+            background-color: #2e8442;
+            color: white;
+
+            &:hover {
+                background-color: color.adjust(#498757, $lightness: 10%);
+                transform: scale(1.05);
+            }
+        }
+
+        &.info-hotel-btn {
+            background-color: #5f85b0;
+            color: white;
+
+            &:hover {
+                background-color: color.adjust(#4f9aeb, $lightness: 10%);
+                transform: scale(1.05);
+            }
+        }
+    }
+}
+
+// Modal container
+#booking-form-container {
+    display: none; // Hides modal initially
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $overlay-bg;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    &.active {
+        display: flex; // Only visible when class "active" is added
+    }
+
+    .modal-content {
+        background: white;
+        padding: 20px;
+        margin-top: 2.5%;
+        margin-left: 35%;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        width: 400px;
+        position: relative;
+        animation: fadeIn 0.3s ease-in-out;
+
+        h2 {
+            text-align: center;
+            color: $primary-color;
+            margin-bottom: 15px;
+        }
+
+        // Close button
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: $dark-text;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: red;
+            }
+        }
+
+        // Form styles
+        form {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                font-weight: bold;
+                margin: 10px 0 5px;
+            }
+
+            input {
+                width: 100%;
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                font-size: 1rem;
+                transition: border 0.3s ease;
+
+                &:focus {
+                    border: 1px solid $primary-color;
+                    outline: none;
+                }
+            }
+
+            button {
+                background: $secondary-color;
+                color: white;
+                font-size: 1.1rem;
+                padding: 12px;
+                margin-top: 15px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background 0.3s ease-in-out;
+
+                &:hover {
+                    background: color.adjust($secondary-color, $lightness: 10%);
+                }
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+// memories trip section 
+.memory-section-container {
+    padding: 60px 20px;
+    background-color: #f4f4f4;
+    text-align: center;
+
+    .content {
+        max-width: 800px;
+        margin: 0 auto;
+
+        h1 {
+            font-size: 2.5rem;
+            color: $primary-color;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: color.adjust($primary-color, $lightness: -20%);
+            margin-bottom: 40px;
+        }
+
+        // Steps container styles
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 40px;
+
+            .step {
+                background-color: #fff;
+                padding: 20px;
+                padding-left: 70px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                position: relative;
+                text-align: left;
+
+                // Step number style positioned absolutely
+                .step-number {
+                    position: absolute;
+                    top: 20px;
+                    left: 20px;
+                    width: 40px;
+                    height: 40px;
+                    line-height: 40px;
+                    background-color: $secondary-color;
+                    color: $primary-color;
+                    font-weight: bold;
+                    border-radius: 50%;
+                    text-align: center;
+                }
+
+                h2 {
+                    font-size: 1.5rem;
+                    margin: 0 0 10px;
+                    color: $primary-color;
+                }
+
+                p {
+                    font-size: 1rem;
+                    color: $text-color;
+                    margin: 0;
+                }
+            }
+        }
+
+        // Call-to-action button style
+        .explore-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            background-color: $primary-color;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: $hover-btn;
+            }
+        }
+    }
+}
+
+// Responsive adjustments (optional)
+@media (max-width: 600px) {
+    .container {
+        padding: 40px 10px;
+
+        .content {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .steps {
+                .step {
+                    padding-left: 60px;
+
+                    .step-number {
+                        width: 35px;
+                        height: 35px;
+                        line-height: 35px;
+                    }
+
+                    h2 {
+                        font-size: 1.3rem;
+                    }
+
+                    p {
+                        font-size: 0.9rem;
+                    }
+                }
+            }
+
+            .explore-btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+// Responsive design
+@media (max-width: 480px) {
+    #booking-form-container .modal-content {
+        width: 90%;
+        padding: 15px;
+    }
+}

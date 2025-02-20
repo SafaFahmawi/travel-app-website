@@ -1,0 +1,43 @@
+@use 'colors' as *;
+
+// General Reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $font-primary;
+}
+
+.scrolling-gallery {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 20px 0;
+
+  .gallery-wrapper {
+      display: flex;
+      width: 100%;
+  }
+
+  .gallery {
+      display: flex;
+      gap: 10px;
+      animation: scrollImages 35s linear infinite;
+
+      img {
+          width: 200px;
+          height: 200px;
+          border-radius: 10px;
+          object-fit: cover;
+      }
+  }
+}
+
+// Keyframes for infinite scrolling
+@keyframes scrollImages {
+  from {
+      transform: translateX(0);
+  }
+  to {
+      transform: translateX(-100%);
+  }
+}
