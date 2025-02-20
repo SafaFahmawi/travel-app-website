@@ -39,10 +39,14 @@ The application uses multiple APIs including:
 
 ### Steps
 1. **Clone the repository:**
-   ``` git clone `https://github.com/SafaFahmawi/travel-app-website.git`
+   ```sh
+   git clone https://github.com/SafaFahmawi/travel-app-website.git
+   ```
 
 2. **Install dependencies:**
-   ``` npm install
+   ```sh
+   npm install
+   ```
 
 3. **Set up environment variables:**
    - Create a `.env` file in the root directory.
@@ -56,15 +60,20 @@ The application uses multiple APIs including:
      ```
 
 4. **Start the development server:**
-   ``` npm run build-dev
+   ```sh
+   npm run build-dev
    ```
    The app will be available at `http://localhost:8080/`.
 
 5. **Build for production:**
-   ``` npm run build-prod
+   ```sh
+   npm run build-prod
+   ```
 
 6. **Run the Express server:**
-   ``` npm start
+   ```sh
+   npm start
+   ```
 
 ## API Endpoints
 | Method | Endpoint | Description |
@@ -83,8 +92,10 @@ The application uses multiple APIs including:
   - Uses `MiniCssExtractPlugin` for CSS extraction
   - Includes hashed filenames for caching
   - Enables `WorkboxPlugin` for offline support
+
 ---
 
 ### 📌 Notes:
 - Ensure API keys are correctly set in `.env` before running.
+- Contact me for any issues or improvements!
 
