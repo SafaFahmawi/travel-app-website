@@ -45,7 +45,7 @@ describe("API Functions", () => {
         });
 
         const data = await getPhoto("UnknownCity");
-        expect(data).toBe("../images/plane.png");
+        expect(data).toBe("../../../dist/images/plane.png");
     });
 
     test("getCountryData returns country details", async () => {
