@@ -64,7 +64,7 @@ async function handleSubmit(e) {
       countdown,
       tripLength,
       cityImage,
-      temperature: weatherData.temperature,
+      temperature: weatherData.temperature || "Temperature not available",
       weather_condition: weatherData.weather_condition,
       name: countryData.name || "Country name not available",
       currency: countryData.currency || "Currency not available",

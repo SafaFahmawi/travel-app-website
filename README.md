@@ -48,29 +48,18 @@ The application uses multiple APIs including:
    npm install
    ```
 
-3. **Set up environment variables:**
-   - Create a `.env` file in the root directory.
-   - Add the following keys with your API credentials:
-     ```env
-     GEONAMES_USERNAME=your_username
-     WEATHERBIT_API_KEY=your_api_key
-     PIXABAY_API_KEY=your_api_key
-     AMADEUS_API_KEY=your_api_key
-     AMADEUS_API_SECRET=your_secret
-     ```
-
-4. **Start the development server:**
+3. **Start the development server:**
    ```sh
    npm run build-dev
    ```
    The app will be available at `http://localhost:8080/`.
 
-5. **Build for production:**
+4. **Build for production:**
    ```sh
    npm run build-prod
    ```
 
-6. **Run the Express server:**
+5. **Run the Express server:**
    ```sh
    npm start
    ```

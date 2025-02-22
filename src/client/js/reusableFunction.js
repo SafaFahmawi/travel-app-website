@@ -73,56 +73,92 @@ function printTrip() {
     const doc = new jsPDF();
     let trips = JSON.parse(localStorage.getItem("trips")) || [];
 
-    console.log(trips);  // Debugging: Check the trips data
+    console.log(trips); // Debugging: Check the trips data
 
     // Remove duplicate trips based on destinationCity
     const uniqueTrips = [...new Map(trips.map(item => [item.destinationCity, item])).values()];
 
-    let yOffset = 10; // Starting Y position for the first page
+    let yOffset = 15; // Starting Y position for the first page
+    const pageHeight = doc.internal.pageSize.height; // Get the page height
 
     uniqueTrips.forEach((trip, index) => {
-        console.log(trip);  // Debugging: Check each trip object
+        console.log(trip); // Debugging: Check each trip object
 
-        doc.text(`Trip ${index + 1}: ${trip.destinationCity || 'N/A'}`, 10, yOffset);
+        // Function to check if there's enough space, if not, add a new page
+        const checkPageBreak = (extraSpace = 10) => {
+            if (yOffset + extraSpace > pageHeight - 10) {  // Ensure space at the bottom
+                doc.addPage();
+                yOffset = 15; // Reset Y position after page break
+            }
+        };
+
+        // **Spacing Before Each Trip**
+        if (index > 0) yOffset += 10; // Add extra space between trips
+
+        // **Trip Title with Background**
+        doc.setFillColor(220, 220, 220); // Light gray background
+        doc.rect(10, yOffset - 5, 190, 10, 'F'); // Draw filled rectangle
+        doc.setFontSize(14).setFont("helvetica", "bold");
+        doc.text(`Trip ${index + 1}: ${trip.destinationCity || 'N/A'}`, 15, yOffset);
         yOffset += 10;
+        checkPageBreak();
+
+        // **Trip Details**
+        doc.setFontSize(12).setFont("helvetica", "normal");
         doc.text(`Departure: ${trip.departingDate || 'N/A'}`, 10, yOffset);
-        yOffset += 10;
+        yOffset += 8;
         doc.text(`Arrival: ${trip.arrivingDate || 'N/A'}`, 10, yOffset);
-        yOffset += 10;
+        yOffset += 8;
         doc.text(`Weather: ${trip.temperature || 'N/A'}°C, ${trip.weather_condition || 'N/A'}`, 10, yOffset);
-        yOffset += 10;
+        yOffset += 8;
         doc.text(`Country: ${trip.name || 'N/A'}`, 10, yOffset);
-        yOffset += 10;
+        yOffset += 12;
+        checkPageBreak();
 
-        // Check if hotel information exists
+        // **Thicker Separator Line Between Trips**
+        doc.setDrawColor(50, 50, 50); // Dark gray line
+        doc.setLineWidth(1); // Thicker line
+        doc.line(10, yOffset, 200, yOffset); // Draw a line across the page
+        yOffset += 8;
+        checkPageBreak();
+
+        // **Hotels Section**
         if (trip.hotel && Array.isArray(trip.hotel) && trip.hotel.length > 0) {
+            doc.setFontSize(14).setFont("helvetica", "bold");
             doc.text('Hotels:', 10, yOffset);
             yOffset += 10;
+            checkPageBreak();
+
             trip.hotel.forEach((hotel, hotelIndex) => {
-                doc.text(`Hotel ${hotelIndex + 1}: ${hotel.name || 'N/A'}`, 10, yOffset);
+                doc.setFontSize(12).setFont("helvetica", "normal");
+                doc.text(`• ${hotel.name || 'N/A'}`, 15, yOffset);
+                yOffset += 8;
+                checkPageBreak();
+                doc.text(`   ID: ${hotel.hotelId || 'N/A'}`, 20, yOffset);
+                yOffset += 6;
+                checkPageBreak();
+                doc.text(`   Chain Code: ${hotel.chainCode || 'N/A'}`, 20, yOffset);
+                yOffset += 6;
+                checkPageBreak();
+                doc.text(`   Distance: ${hotel.distance ? hotel.distance.value : 'N/A'} ${hotel.distance ? hotel.distance.unit : ''}`, 20, yOffset);
                 yOffset += 10;
-                doc.text(`Hotel ID: ${hotel.hotelId || 'N/A'}`, 10, yOffset);
-                yOffset += 10;
-                doc.text(`Chain Code: ${hotel.chainCode || 'N/A'}`, 10, yOffset);
-                yOffset += 10;
-                doc.text(`Distance: ${hotel.distance ? hotel.distance.value : 'N/A'} ${hotel.distance ? hotel.distance.unit : ''}`, 10, yOffset);
-                yOffset += 10;
+                checkPageBreak();
             });
         } else {
+            doc.setFontSize(12).setFont("helvetica", "italic");
             doc.text('No hotels available', 10, yOffset);
             yOffset += 10;
+            checkPageBreak();
         }
 
-        // Add new page if not the last trip and if the Y position exceeds the page height
-        if (yOffset > 260) {  // Adjust the value as needed
-            doc.addPage();
-            yOffset = 10;  // Reset Y position after a page break
-        }
+        // **Spacing Before Next Trip**
+        yOffset += 10;
     });
 
     // Save the PDF
     doc.save('Trip_Information.pdf');
 }
+
 
 // Function to print the trip list
 function showHotelCards(hotels) {

@@ -1,4 +1,4 @@
-// Fetches geographical coordinates (latitude and longitude) for a given city from the backend.
+// Fetches geographical coordinates (latitude and longitude) for a given city from the backend. 
 async function getGeoData(city) {
     try {
         const response = await fetch(`http://localhost:8000/get-location?city=${city}`);
@@ -39,15 +39,14 @@ async function getPhoto(city) {
             return imageData.imageURL;
         } else {
             console.warn("No imageURL found, using fallback image.");
-            return "../images/plane.png";
+            return "../../../dist/images/plane.png";
         }
     } catch (error) {
         console.error("Error fetching photo:", error);
         alert("Photo API is available, but there was an issue fetching data.");
-        return "../images/plane.png";
+        return "../../../dist/images/plane.png";
     }
 }
-
 
 // Fetches country details based on the capital city using the REST Countries API.
 async function getCountryData(city) {
@@ -104,4 +103,4 @@ export {
     getPhoto,
     getCountryData,
     getHotels
-}; 
+};
